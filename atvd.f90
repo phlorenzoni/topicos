@@ -6,6 +6,7 @@ program atividade_1
     real(dp) :: x(Ndados),y(Ndados), media_, var_,des 
     real(dp), allocatable :: media_mov(:)
     character (len=100) :: fname
+    integer(i8) :: delta_L ! Largura
     
     fname='corrente.dat'
     call leitura_dados(Ndados,x,y,fname)
@@ -19,6 +20,11 @@ program atividade_1
    write(*,'(A,2x,f5.3)') "Media:", media_
    write(*,'(A,2x,f5.3)') "Variancia:", var_
    write(*,'(A,2x,f5.3)') "Desvio padrao", des
+   
+   ! Largura da janela
+   delta_L = 3_i8
+   call media_movel(Ndados,y, delta_L)
+
 
 contains
 subroutine leitura_dados(Ndados, x, y, nome_arq)
