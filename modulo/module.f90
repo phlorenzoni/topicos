@@ -51,7 +51,7 @@ desvio = var**(0.5_dp)
 
 end function
 
-function media_movel(Ndados,vetor_dados, largura) result (media_)
+subroutine media_movel(Ndados,vetor_dados, largura)
     
     integer(i8), intent(in) :: Ndados  ! Quantidade de dados
     real(dp), intent(in) :: vetor_dados(Ndados)  ! Vetor de dados
@@ -81,8 +81,12 @@ function media_movel(Ndados,vetor_dados, largura) result (media_)
         enddo
        ! Sitio i recebe a média
        media_(i) = soma / (1.0_dp*largura) 
-
     enddo
-end function
 
+    open(newunit=i, file='output.dat')
+    do j = 1, Nsitios
+        write(i, '(f5.2)') media_(j)
+    enddo
+    close(i)
+end subroutine
 end module statistical_tools
