@@ -8,18 +8,7 @@ program atividade_1
     character (len=100) :: fname
     
     fname='corrente.dat'
-    subroutine leitura_dados(Ndados, x, y, nome_arq)
-
-
-    ! Abre o arquivo
-    open(unit=arquivo, file=fname)
-    ! Faz a leitura
-    do i = 1, Ndados
-    read(arquivo, *) x(i), y(i)
-    enddo
-
-    ! Fecha o arquivo
-    close(arquivo)
+    call leitura_dados(Ndados,x,y,fname)
 
 
     
@@ -32,5 +21,22 @@ program atividade_1
    write(*,'(A,2x,f5.3)') "Desvio padrao", des
 
 contains
+subroutine leitura_dados(Ndados, x, y, nome_arq)
+!Vetores que receberão os dados dos eixos x e y
+integer(i8) :: Ndados
+real(dp) :: x (Ndados), y(Ndados)
+integer :: arquivo, i 
+character(len=100) :: nome_arq
 
+! Abre o arquivo
+open(unit=arquivo, file=fname)
+! Faz a leitura
+do i = 1, Ndados
+    read(arquivo, *) x(i), y(i)
+enddo
+
+! Fecha o arquivo
+close(arquivo)
+
+endsubroutine
 end program
