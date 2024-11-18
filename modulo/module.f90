@@ -51,4 +51,38 @@ desvio = var**(0.5_dp)
 
 end function
 
+function media_movel(Ndados,vetor_dados, largura) result (media_)
+    
+    integer(i8), intent(in) :: Ndados  ! Quantidade de dados
+    real(dp), intent(in) :: vetor_dados(Ndados)  ! Vetor de dados
+    integer(i8) :: Nsitios
+    integer(i8), intent(in) :: largura  ! Largura da janela
+    real(dp), allocatable :: media_(:)  ! Vetor de médias móveis
+    integer(i8) :: i, j
+    real(dp) :: soma
+
+    ! Calculando o numero de sitios do vetor media movel
+    Nsitios = Ndados-largura + 1
+
+    ! Inicializando o vetor de médias móveis
+    allocate(media_(Nsitios))
+
+
+    ! Calculando a média móvel para cada elemento
+    do i = 1, Ndados
+        
+        ! Evita acessar elementos fora do vetor (condição de parada)
+        if (i+largura-1 > Ndados) exit
+        
+        soma = 0.0_dp
+
+        do j = i, largura + i -1
+            soma = soma + vetor_dados(j)
+        enddo
+       ! Sitio i recebe a média
+       media_(i) = soma / (1.0_dp*largura) 
+
+    enddo
+end function
+
 end module statistical_tools
