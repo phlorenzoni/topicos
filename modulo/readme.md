@@ -1,5 +1,5 @@
 # Modulo statistical tools em Fortran 
-### Este módulo possui funções para o cálculo de média, desvio padrão e variância    
+### Este módulo possui funções para o cálculo de média, desvio padrão, variância e média móvel.   
 Para utilizar as funções, o usuário deve passar a quantidade de dados (Ndados) e o vetor no qual serão calculadas as estatísticas.    
 Exemplo:    
 Ndados=5    
